@@ -40,4 +40,41 @@ This cheat sheet covers basic Git commands for managing your version control.
 
 * [https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet)
 * [https://education.github.com/pack](https://education.github.com/pack)
-# Git-Crash-course
+
+In Git, merge strategies define how the repository combines changes from different branches. When you execute a `git merge` command, Git attempts to find a common ancestor commit between the branch you're on (current branch) and the branch you're merging from (target branch). It then analyzes the changes introduced in both branches based on that common ancestor and creates a new "merge commit" that incorporates those changes.
+
+Here's a breakdown of Git merge strategies:
+
+**Default Strategy (Ours):**
+
+* This is the most common strategy, chosen by Git by default in most scenarios.
+* It performs a 3-way merge, comparing the current branch head, target branch head, and the common ancestor commit.
+* If there are no conflicts (changes to the same lines of code), Git automatically merges the changes and creates a merge commit.
+* This strategy is efficient but can lead to merge conflicts if both branches modify the same file sections.
+
+**Other Strategies:**
+
+* **Recursive (deprecated):** Similar to ours but can have issues with complex merges. No longer recommended.
+* **Fast-forward:** Applies when the target branch is a direct linear descendant of the current branch. Git simply moves the branch pointer to the target branch's commit, essentially fast-forwarding the current branch.
+* **Octopus:** Creates a merge commit with multiple parents (one for each merged branch). Use with caution as it can make history harder to follow.
+* **Resolve:** Similar to ours but requires manual intervention to resolve merge conflicts before creating a merge commit.
+
+**Specifying Strategies:**
+
+You can explicitly specify the merge strategy using the `-s` flag with the `git merge` command. For example:
+
+```
+git merge -s ours <branch-name>
+```
+
+This command uses the "ours" strategy to merge the `<branch-name>` branch.
+
+**Choosing the Right Strategy:**
+
+* For simple merges without conflicts, "ours" (default) is usually sufficient.
+* If you anticipate conflicts, using `resolve` allows you to manually address them before creating the merge commit.
+* Avoid "octopus" unless you have a specific need for a merge commit with multiple parents.
+
+By understanding merge strategies, you can effectively combine changes from different branches in your Git workflow.
+
+
