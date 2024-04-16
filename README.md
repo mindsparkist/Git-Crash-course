@@ -41,6 +41,8 @@ This cheat sheet covers basic Git commands for managing your version control.
 * [https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet)
 * [https://education.github.com/pack](https://education.github.com/pack)
 
+## Git, merge strategies
+
 In Git, merge strategies define how the repository combines changes from different branches. When you execute a `git merge` command, Git attempts to find a common ancestor commit between the branch you're on (current branch) and the branch you're merging from (target branch). It then analyzes the changes introduced in both branches based on that common ancestor and creates a new "merge commit" that incorporates those changes.
 
 Here's a breakdown of Git merge strategies:
