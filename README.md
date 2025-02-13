@@ -332,6 +332,60 @@ git commit --amend
 Would you like to know more about any other Git commands or need help with something specific?
 
 
+**Git Rebase** is a command used to integrate changes from one branch into another. It allows you to move or combine a sequence of commits to a new base commit. This can help create a cleaner, more linear project history.
+
+### How Git Rebase Works
+When you rebase, Git applies the changes from your current branch onto the tip of another branch. This effectively "replays" your commits on top of the target branch.
+
+### Basic Usage
+1. **Switch to the branch you want to rebase**:
+   ```bash
+   git checkout feature-branch
+   ```
+
+2. **Rebase onto the target branch**:
+   ```bash
+   git rebase main
+   # This will apply the commits from feature-branch onto the tip of main
+   ```
+
+### Example
+Let's say you have the following commit history:
+
+```
+A---B---C feature-branch
+     /
+D---E---F main
+```
+
+After running `git rebase main` on `feature-branch`, the history will look like this:
+
+```
+D---E---F---A'---B'---C' feature-branch
+```
+
+### Options
+- **Interactive Rebase**: Use `git rebase -i <base>` to interactively edit, reorder, or squash commits.
+  ```bash
+  git rebase -i main
+  # Opens an editor to modify the commit history interactively
+  ```
+
+- **Abort Rebase**: If you encounter conflicts or want to stop the rebase, use `git rebase --abort`.
+  ```bash
+  git rebase --abort
+  ```
+
+- **Continue Rebase**: After resolving conflicts, use `git rebase --continue` to proceed.
+  ```bash
+  git rebase --continue
+  ```
+
+### Important Notes
+- **History Rewriting**: Rebasing rewrites commit history, so it's best used on local branches that haven't been pushed to a shared repository.
+- **Force Push**: After rebasing, you'll need to force-push (`git push --force`) if the branch has already been pushed.
+
+Would you like to explore more about interactive rebase or any other Git commands?
 
 
 
