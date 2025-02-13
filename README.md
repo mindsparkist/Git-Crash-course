@@ -223,4 +223,118 @@ Here's a Git branching strategy for your scenario using Dev, QE, UAT, Prod, and 
 * Enforce consistent naming conventions for branches to improve clarity.
 * Encourage developers to write clear and concise commit messages.
 * Utilize code review tools and guidelines to maintain code quality.
-* Adapt this strategy to your specific team size, project needs, and release cadence. 
+* Adapt this strategy to your specific team size, project needs, and release cadence.
+
+**Git reset** is a powerful command in Git that allows you to undo changes in your repository. It can be used to reset the current HEAD to a specified state, effectively changing the commit history. Here are the main types of `git reset`:
+
+1. **Soft Reset (`--soft`)**: Moves the HEAD to the specified commit, but leaves the changes in the staging area (index). This is useful if you want to uncommit changes but keep them staged for a new commit.
+   ```bash
+   git reset --soft <commit>
+   ```
+
+2. **Mixed Reset (`--mixed`)**: This is the default option. It moves the HEAD to the specified commit and resets the staging area, but leaves the working directory unchanged. This is useful for undoing commits and un-staging changes.
+   ```bash
+   git reset --mixed <commit>
+   ```
+
+3. **Hard Reset (`--hard`)**: Moves the HEAD to the specified commit and resets both the staging area and the working directory to match the specified commit. This is a destructive operation as it will discard all changes in the working directory.
+   ```bash
+   git reset --hard <commit>
+   ```
+
+Would you like to know more about how to use any specific type of reset?
+
+**Git Revert** is a command used in Git to undo changes by creating a new commit that reverses the changes made by a previous commit. Unlike `git reset`, which can alter the commit history, `git revert` is a safe way to undo changes because it doesn't remove any commits from the history.
+
+Here's a basic example of how to use `git revert`:
+
+1. **Identify the commit to revert**: Use `git log` to find the commit hash you want to revert.
+2. **Revert the commit**: Run `git revert <commit-hash>`. This will create a new commit that undoes the changes made by the specified commit.
+
+```bash
+git log
+# Find the commit hash you want to revert
+git revert abc1234
+# This will create a new commit that reverses the changes of commit abc1234
+```
+
+Would you like to know more about other Git commands or need help with something specific?
+
+**Git Revert** and **Git Reset** are both commands used to undo changes in Git, but they work in different ways and are used for different purposes:
+
+### Git Revert
+- **Purpose**: Safely undo changes by creating a new commit that reverses the changes made by a previous commit.
+- **Usage**: `git revert <commit-hash>`
+- **History**: Preserves the commit history, making it clear that a change was undone.
+- **Example**:
+  ```bash
+  git revert abc1234
+  # Creates a new commit that undoes the changes of commit abc1234
+  ```
+
+### Git Reset
+- **Purpose**: Move the current branch to a different commit, optionally modifying the index (staging area) and working directory.
+- **Usage**: `git reset [--soft | --mixed | --hard] <commit-hash>`
+- **History**: Can alter commit history, especially with `--hard` and `--mixed` options.
+- **Options**:
+  - `--soft`: Moves the branch pointer to the specified commit, but leaves the index and working directory unchanged.
+  - `--mixed` (default): Moves the branch pointer and resets the index, but leaves the working directory unchanged.
+  - `--hard`: Moves the branch pointer, resets the index, and resets the working directory to match the specified commit.
+- **Example**:
+  ```bash
+  git reset --hard abc1234
+  # Moves the branch pointer, resets the index, and working directory to commit abc1234
+  ```
+
+### Key Differences
+- **Safety**: `git revert` is safer as it doesn't rewrite history, while `git reset` can rewrite history, especially with `--hard` and `--mixed`.
+- **Use Case**: Use `git revert` when you want to undo changes without altering the commit history. Use `git reset` when you need to move the branch pointer and potentially modify the index and working directory.
+
+Would you like to dive deeper into any of these commands or have another question?
+
+**Git Amend** is a command used to modify the most recent commit. It's useful for making small corrections, such as fixing a typo in a commit message or adding files that were accidentally left out of the last commit.
+
+### How to Use Git Amend
+1. **Make changes**: Edit your files or stage new changes.
+2. **Amend the commit**: Use `git commit --amend` to modify the most recent commit.
+
+Here's an example:
+
+```bash
+# Make changes or stage new files
+git add <file>
+
+# Amend the last commit
+git commit --amend
+```
+
+### Options
+- **Amend the commit message**: If you only want to change the commit message, you can run `git commit --amend` without staging any new changes. This will open your default text editor to edit the commit message.
+- **Add changes to the last commit**: If you want to add changes to the last commit, stage the changes first with `git add`, then run `git commit --amend`.
+
+### Example
+1. **Fixing a commit message**:
+   ```bash
+   git commit --amend
+   # This opens the editor to change the commit message
+   ```
+
+2. **Adding a file to the last commit**:
+   ```bash
+   git add forgotten_file.txt
+   git commit --amend
+   # This adds forgotten_file.txt to the last commit
+   ```
+
+### Important Note
+- **History Rewriting**: `git commit --amend` rewrites the commit history, so it's best used before pushing commits to a shared repository. If you've already pushed the commit, you'll need to force-push (`git push --force`), which can disrupt other collaborators.
+
+Would you like to know more about any other Git commands or need help with something specific?
+
+
+
+
+
+
+
+
