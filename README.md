@@ -1,3 +1,97 @@
+Welcome back to Git! It is incredibly common for the day-to-day commands to slip your mind when you haven't run them locally in a while. 
+
+Since you already have the repository cloned and the code updated, you just need to execute the standard three-step process to get your changes up to GitHub: **Add, Commit, and Push.**
+
+Here is your quick refresher course.
+
+### The Standard Git Workflow
+
+Open your terminal, ensure you are inside your `flask-portfolio` directory, and run through these steps:
+
+**1. Check Your Status (Optional but Recommended)**
+Before staging anything, it is a good habit to see exactly which files Git has noticed you modified.
+```bash
+git status
+```
+*You should see your modified files listed in red.*
+
+**2. Stage Your Changes**
+This tells Git, "I want to include all of these updated files in my next save point." The period (`.`) means "everything in this current directory."
+```bash
+git add .
+```
+
+**3. Commit Your Changes**
+This creates the actual "save point" in your local history. Make sure your message clearly describes what you changed.
+```bash
+git commit -m "Updated portfolio code and added dynamic templates"
+```
+
+**4. Push to GitHub**
+This final command uploads your local save point to the remote GitHub repository. 
+```bash
+git push origin main
+```
+*(Note: If your repository is older, the default branch might be named `master` instead of `main`. If the command above fails, try `git push origin master`).*
+
+---
+
+### A Quick Note on Authentication
+
+Since it has been a long time since you pushed code, GitHub no longer accepts account passwords in the terminal for security reasons. 
+
+Did the push command go through smoothly, or did GitHub block it and ask you to provide a Personal Access Token (PAT)?
+
+Exactly as suspected! This is the exact roadblock everyone hits when returning to Git. 
+
+In August 2021, GitHub permanently removed the ability to use your standard account password in the terminal. To push code, you now need to generate a **Personal Access Token (PAT)**. 
+
+Think of it as a highly secure, temporary password specifically for your terminal. Here is exactly how to create and use one.
+
+### Step 1: Generate your Personal Access Token
+1. Log in to GitHub in your web browser.
+2. Click your profile picture in the top-right corner and select **Settings**.
+3. Scroll all the way down the left sidebar and click **Developer settings**.
+4. Click **Personal access tokens**, then select **Tokens (classic)**.
+5. Click the **Generate new token** button (select "Generate new token (classic)").
+6. **Note:** Name it something like "Terminal Push Token".
+7. **Expiration:** Leave it at 30 days (or set to No Expiration, though less secure).
+8. **Scopes (Crucial step):** Check the box next to **`repo`**. This grants the token permission to read and write to your repositories.
+9. Scroll to the bottom and click **Generate token**.
+
+### Step 2: Copy the Token
+You will now see a long string of characters starting with `ghp_`. 
+**Copy this immediately.** GitHub will never show it to you again once you leave this page.
+
+### Step 3: Push Your Code
+Go back to your terminal and run the push command again:
+
+```bash
+git push origin main
+```
+
+When it prompts you for your credentials:
+* **Username:** Enter your GitHub username (e.g., `mindsparkist`).
+* **Password:** Paste the **Personal Access Token** you just copied. *(Note: When you paste it into the terminal, the cursor will not move, and you will not see asterisks. This is a standard security feature. Just paste it and press Enter).*
+
+### Step 4 (Optional): Save the Token Locally
+To avoid having to paste this long token every single time you push, you can tell Git to cache your credentials. Run this command after a successful push:
+
+**For Windows:**
+```bash
+git config --global credential.helper wincred
+```
+
+**For Mac:**
+```bash
+git config --global credential.helper osxkeychain
+```
+
+**For Linux:**
+```bash
+git config --global credential.helper store
+```
+
 ## Git Cheat Sheet
 
 This cheat sheet covers basic Git commands for managing your version control.
